@@ -25,6 +25,10 @@
               extensions = [ "rust-analyzer" "rust-src" ];
             })
           ]; # buildInputs
+
+          shellHook = ''
+            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [ pkgs.dbus ]}:$LD_LIBRARY_PATH"
+          '';
         }; # default
       }
     ); # devShells
