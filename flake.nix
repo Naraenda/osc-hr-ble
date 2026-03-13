@@ -1,5 +1,5 @@
 {
-  description = "A devShell example";
+  description = "a rust dev flake";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.rust-overlay.url = "github:oxalica/rust-overlay";
@@ -20,7 +20,10 @@
         default = with pkgs; mkShell {
           buildInputs = [
             pkg-config
-            rust-bin.stable.latest.default
+            dbus
+            (rust-bin.stable.latest.default.override {
+              extensions = [ "rust-analyzer" "rust-src" ];
+            })
           ]; # buildInputs
         }; # default
       }
